@@ -1,0 +1,59 @@
+{namespace neos=TYPO3\Neos\ViewHelpers}
+{namespace m=TYPO3\Media\ViewHelpers}
+<div class="row container">
+	<div class="default-header" style="max-width: 100%; background: url('{m:uri.image(image: headerImage)}') no-repeat center center; background-size: cover !important;">
+	</div>
+</div>
+
+<section class="row" id="event">
+	<div class="columns small-12">
+		{breadcrumbMenu -> f:format.raw()}
+	</div>
+	<article class="columns small-12 medium-9">
+		<h1>{event.properties.title} {f:if(condition: node.properties.type, then: '| {node.properties.type}')}</h1>
+		<p>{event.properties.description}</p>
+		<div id="map-canvas"
+			data-role="google-map"
+			data-google-map-address="{event.properties.address}, {event.properties.city}"
+			data-google-map-location="{event.properties.location}"
+			data-google-map-locationDescription="{event.properties.locationDescription}"
+			data-google-map-street="{event.properties.address}"
+			data-google-map-city="{event.properties.city}"
+			data-google-map-zipcode="{event.properties.zipCode}"
+			>
+		</div>
+	</article>
+	<aside class="columns small-12 medium-3">
+		<h2>Datum en tijd</h2>
+		<time>
+			<div>
+				<i class="fa fa-calendar-o"></i>
+				{event.properties.start -> f:format.date(format: 'd M Y', forceLocale: 'nl', localeFormatType: 'date', localeFormatLength: 'full') -> f:format.case(mode: 'capital')}
+			</div>
+			<div>
+				<i class="fa fa-clock-o"></i>
+				{event.properties.start -> f:format.date(format: 'H:i')}
+				-
+				{event.properties.end -> f:format.date(format: 'H:i')}
+			</div>
+			<div>
+				<neos:link.node node="{node}" arguments="{ics: 'true'}">
+					Voeg toe aan je agenda
+				</neos:link.node>
+			</div>
+		</time>
+		<h2>Locatie</h2>
+		<address>
+			<div>{event.properties.location}</div>
+			<div>{event.properties.address}</div>
+			<div>{event.properties.zipCode}</div>
+			<div>{event.properties.city}</div>
+			<f:if condition="{event.properties.locationDescription}">
+				<hr />
+				<p>
+					{event.properties.locationDescription}
+				</p>
+			</f:if>
+		</address>
+	</aside>
+</section>

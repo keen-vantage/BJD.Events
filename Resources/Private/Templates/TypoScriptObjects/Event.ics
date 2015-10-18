@@ -1,0 +1,16 @@
+BEGIN:VCALENDAR
+METHOD:PUBLISH
+VERSION:2.0
+X-WR-TIMEZONE:Europe/Amsterdam
+TZID:Europe/Amsterdam
+PRODID:-//Thomas Multimedia//Clinic Time//EN
+BEGIN:VEVENT
+SUMMARY:{node.properties.title}
+DESCRIPTION:{node.properties.description}
+UID:3097
+STATUS:CONFIRMED
+DTSTART:{start -> f:format.date(format: 'Ymd')}T{start -> f:format.date(format: 'His')}
+DTEND:{end -> f:format.date(format: 'Ymd')}T{end -> f:format.date(format: 'His')}
+LOCATION:{node.properties.address} {node.properties.city}
+END:VEVENT
+END:VCALENDAR

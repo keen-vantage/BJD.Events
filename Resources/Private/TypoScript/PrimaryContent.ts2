@@ -1,0 +1,5 @@
+prototype(TYPO3.Neos:PrimaryContent).Event {
+	condition = ${q(documentNode).is('[instanceof BJD.Events:Event]')}
+	type = 'BJD.Events:EventContent'
+	@position = 'start'
+}

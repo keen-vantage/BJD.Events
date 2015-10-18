@@ -1,0 +1,117 @@
+{namespace neos=TYPO3\Neos\ViewHelpers}
+{namespace bjd=Nieuwenhuizen\BuJitsuDo\ViewHelpers}
+<f:if condition="{event.properties.address}">
+	<div class="row background-gray-light">
+		<div class="columns small-10 large-5 small-offset-1">
+			<h3>{event.properties.title} {f:if(condition: event.properties.type, then: '| {event.properties.type}')}</h3>
+			<p>{event.properties.description}</p>
+			<p>
+				<i class="fa fa-clock-o"></i>
+				<time>
+					{event.properties.start -> f:format.date(format: 'H:i')}
+					-
+					{event.properties.end -> f:format.date(format: 'H:i')}
+				</time>
+			</p>
+			<p>
+				<f:security.ifAuthenticated>
+					<f:then>
+						<bjd:event.isRegisteredForEvent event="{event}">
+							<f:then>
+								<f:link.action additionalAttributes="{data-action: 'remove-from-event'}" action="removeAttendee" controller="Event" package="Nieuwenhuizen.BuJitsuDo" arguments="{event: event.identifier}">
+									<button class="small">
+										<i class="fa fa-min"></i> Meld je af
+									</button>
+								</f:link.action>
+
+								<f:link.action class="hide" additionalAttributes="{data-action: 'add-to-event'}" action="addAttendee" controller="Event" package="Nieuwenhuizen.BuJitsuDo" arguments="{event: event.identifier}">
+									<button class="small">
+										<i class="fa fa-plus"></i> Ik kom ook!
+									</button>
+								</f:link.action>
+							</f:then>
+							<f:else>
+								<f:link.action additionalAttributes="{data-action: 'add-to-event'}" action="addAttendee" controller="Event" package="Nieuwenhuizen.BuJitsuDo" arguments="{event: event.identifier}">
+									<button class="small">
+										<i class="fa fa-plus"></i> Ik kom ook!
+									</button>
+								</f:link.action>
+
+								<f:link.action class="hide" additionalAttributes="{data-action: 'remove-from-event'}" action="removeAttendee" controller="Event" package="Nieuwenhuizen.BuJitsuDo" arguments="{event: event.identifier}">
+									<button class="small">
+										<i class="fa fa-min"></i> Meld je af
+									</button>
+								</f:link.action>
+							</f:else>
+						</bjd:event.isRegisteredForEvent>
+					</f:then>
+					<f:else>
+						<neos:link.node node="{login}">
+							<button class="small">
+								<i class="fa fa-key"></i> Login om je ook op te geven!
+							</button>
+						</neos:link.node>
+					</f:else>
+				</f:security.ifAuthenticated>
+				<neos:link.node node="{event}" arguments="{ics: true}">
+					<button class="small">
+						<i class="fa fa-calendar"></i> Voeg toe aan je agenda
+					</button>
+				</neos:link.node>
+			</p>
+		</div>
+		<f:if condition="{event.properties.type}">
+			<f:then>
+				<f:if condition="{event.properties.attendees}">
+					<div class="columns medium-5 small-10 left small-offset-1">
+						<h3>Kandidaten:</h3>
+						<ul>
+							<f:for each="{event.properties.attendees}" as="attendee">
+								<li>{attendee.label -> neos:link.node(node: attendee)} voor {attendee.nextDegree}</li>
+							</f:for>
+						</ul>
+					</div>
+				</f:if>
+			</f:then>
+			<f:else>
+				<f:if condition="{event.properties.attendees}">
+					<div class="columns medium-5 small-10 small-offset-1">
+						<h3>Aanwezigen:</h3>
+						<ul>
+							<f:for each="{event.properties.attendees}" as="attendee">
+								<li>{attendee.label -> neos:link.node(node: attendee)}</li>
+							</f:for>
+						</ul>
+					</div>
+				</f:if>
+			</f:else>
+		</f:if>
+	</div>
+	<div
+		id="map-canvas"
+		data-role="google-map"
+		data-google-map-address="{event.properties.address}, {event.properties.city}"
+		data-google-map-location="{event.properties.location}"
+		data-google-map-locationDescription="{event.properties.locationDescription}"
+		data-google-map-street="{event.properties.address}"
+		data-google-map-city="{event.properties.city}"
+		data-google-map-zipcode="{event.properties.zipCode}"
+		>
+	</div>
+	<div class="row background-gray">
+		<div class="columns small-11 small-centered">
+			<h3>Locatie</h3>
+			<p>
+				{event.properties.location}<br />
+				{event.properties.address}<br />
+				{f:if(condition: event.properties.zipCode, then: '{event.properties.zipCode}<br />')}
+				{event.properties.city}<br />
+			</p>
+			<f:if condition="{event.properties.locationDescription}">
+				<p>
+					{event.properties.locationDescription}
+				</p>
+			</f:if>
+		</div>
+	</div>
+</f:if>

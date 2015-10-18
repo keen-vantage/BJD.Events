@@ -1,0 +1,50 @@
+prototype(BJD.Events:EventCalendar) < prototype(TYPO3.Neos:Content) {
+	partialRootPath = 'resource://BJD.Events/Private/Templates/NodeTypes/Partials/'
+	node = ${node}
+	document = ${q(node).parents().filter('[instanceof TYPO3.Neos:Document]').get(0)}
+	site = ${q(node).parents().filter('[instanceof Nieuwenhuizen.BuJitsuDo:Homepage]').get(0)}
+	uriPathSegment = ${q(document).property('uriPathSegment')}
+	currentMonth = ${Date.format('now', 'm')}
+	currentYear = ${Date.format('now', 'Y')}
+	login = ${q(site).find('[instanceof BuJitsuDo.Authentication:Login]').get(0)}
+
+	selectedMonth = ${request.arguments.month}
+	selectedYear = ${request.arguments.year}
+
+	selectedDateString = ${request.arguments.month + '-' + request.arguments.year}
+	selectedDate = ${Date.parse(this.selectedDateString, 'm-Y')}
+
+	month = ${this.selectedMonth ? Date.format(this.selectedDate, 'm') : this.currentMonth}
+	year = ${this.selectedYear ? Date.format(this.selectedDate, 'Y') : this.currentYear}
+
+	date = ${this.month + '-' + this.year}
+	currentDate = ${Date.parse(this.date, 'm-Y')}
+
+	nextMonth = ${Date.add(this.currentDate, 'P1M')}
+	prevMonth = ${Date.subtract(this.currentDate, 'P1M')}
+
+	exams = ${DateSearch.query(this.site).nodeType('BJD.Events:Exam').filterAllFutureItems().sortAsc('start').fetch()}
+	events = ${DateSearch.query(this.site).nodeType('BJD.Events:Event').excludeNodeType().filterSingleMonth(this.month,this.year).sortAsc('start').fetch()}
+
+	selectedMonth.@cache {
+		mode = 'uncached'
+		context {
+			1 = 'node'
+		}
+	}
+	selectedYear.@cache {
+		mode = 'uncached'
+		context {
+			1 = 'node'
+		}
+	}
+
+	@cache {
+		mode = 'uncached'
+		context {
+			1 = 'node'
+			2 = 'documentNode'
+			3 = 'site'
+		}
+	}
+}

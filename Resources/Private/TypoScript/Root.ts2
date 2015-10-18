@@ -1,0 +1,3 @@
+include: Library/ContentTypes/*
+include: Library/DocumentTypes/*
+include: PrimaryContent.ts2

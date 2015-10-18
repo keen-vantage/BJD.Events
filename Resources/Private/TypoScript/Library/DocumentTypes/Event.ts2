@@ -1,0 +1,5 @@
+# SingleView item
+prototype(BJD.Events:EventContent) < prototype(Nieuwenhuizen.BuJitsuDo:PageContent) {
+	templatePath = 'resource://BJD.Events/Private/Templates/DocumentTypes/Event.html'
+	event = ${node}
+}

@@ -1,0 +1,33 @@
+{namespace neos=TYPO3\Neos\ViewHelpers}
+<div data-content="event-list" xmlns:f="http://www.w3.org/1999/XSL/Transform">
+	<f:if condition="{exams -> f:count()} > 0">
+		<div class="row small-collapse medium-uncollapse">
+			<f:render partial="Exams" arguments="{exams: exams, classes: 'exam', login: login}" />
+		</div>
+	</f:if>
+
+	<div class="row small-collapse medium-uncollapse">
+		<div class="columns small-12 text-center">
+			<h2>
+				<a href="/{document.properties.uriPathSegment}/events/{prevMonth -> f:format.date(format: 'm')}/{prevMonth -> f:format.date(format: 'Y')}">
+					<i class="fa fa-chevron-circle-left"></i>
+				</a>
+				{currentDate -> f:format.date(format: 'M Y')}
+				<a href="/{document.properties.uriPathSegment}/events/{nextMonth -> f:format.date(format: 'm')}/{nextMonth -> f:format.date(format: 'Y')}">
+					<i class="fa fa-chevron-circle-right"></i>
+				</a>
+			</h2>
+		</div>
+	</div>
+
+	<div class="row small-collapse medium-uncollapse">
+		<f:if condition="{events -> f:count()} == 0">
+			<div data-alert class="alert-box text-center">
+				Geen speciale events deze maand... Goeie ideeën zijn altijd welkom ;)
+			</div>
+		</f:if>
+	</div>
+	<div class="row small-collapse medium-uncollapse">
+		<f:render partial="EventRowLoop" arguments="{_all}" />
+	</div>
+</div>
