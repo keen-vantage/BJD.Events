@@ -1,0 +1,14 @@
+TYPO3:
+  Neos:
+    typoScript:
+      autoInclude:
+        BJD.Events: TRUE
+BJD:
+  Events:
+    notifications:
+      mail:
+        name: 'John Doe'
+        email: 'john@doe.emailaddress'
+        templates:
+          newAttendee: 'Packages/Application/BJD.Events/Resources/Private/Templates/Email/NewAttendee.html'
+          removedAttendee: 'Packages/Application/BJD.Events/Resources/Private/Templates/Email/RemovedAttendee.html'

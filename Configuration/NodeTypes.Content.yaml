@@ -1,0 +1,7 @@
+---
+
+'BJD.Events:EventCalendar':
+  superTypes:
+    - 'TYPO3.Neos:Content'
+  ui:
+    label: 'BJD Evenementen'

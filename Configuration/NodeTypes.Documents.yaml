@@ -1,0 +1,145 @@
+---
+
+'BJD.Events:Agenda':
+  superTypes:
+    - 'TYPO3.Neos.NodeTypes:Page'
+    - 'Nieuwenhuizen.BuJitsuDo:HeaderImageMixin'
+    - 'Nieuwenhuizen.BuJitsuDo:BackgroundColorMixin'
+  ui:
+    label: 'BJD Agenda'
+    icon: 'icon-calendar'
+  constraints:
+    nodeTypes:
+      'TYPO3.Neos:Document': FALSE
+      'BJD.Events:Event': TRUE
+
+'BJD.Events:Event':
+  superTypes:
+    - 'TYPO3.Neos.NodeTypes:Page'
+    - 'Nieuwenhuizen.BuJitsuDo:HeaderImageMixin'
+    - 'Nieuwenhuizen.BuJitsuDo:BackgroundColorMixin'
+  ui:
+    label: 'BJD Event'
+    icon: 'icon-calendar-empty'
+    inspector:
+      tabs:
+        facebook:
+          label: 'Facebook'
+          icon: 'icon-facebook'
+      groups:
+        date:
+          label: 'Datum en tijd'
+          position: 2
+        location:
+          label: 'Locatie'
+          position: 3
+        address:
+          label: 'Adres'
+          position: 4
+        event:
+          label: 'Event'
+          position: 1
+  properties:
+    'description':
+      type: 'string'
+      ui:
+        label: 'Omschrijving'
+        inspector:
+          group: event
+          editor: 'TYPO3.Neos/Inspector/Editors/TextAreaEditor'
+    'start':
+      type: DateTime
+      ui:
+        label: 'Start'
+        inspector:
+          group: date
+          editorOptions:
+            format: 'd-m-Y H:i'
+      search:
+        elasticSearchMapping:
+          type: date
+          include_in_all: false
+          format: 'date_time_no_millis'
+        indexing: '${(node.properties.start ? Date.format(node.properties.start, "Y-m-d\TH:i:sP") : null)}'
+    'end':
+      type: DateTime
+      ui:
+        label: 'Eind'
+        inspector:
+          group: date
+          editorOptions:
+            format: 'd-m-Y H:i'
+      search:
+        elasticSearchMapping:
+          type: date
+          include_in_all: false
+          format: 'date_time_no_millis'
+        indexing: '${(node.properties.end ? Date.format(node.properties.end, "Y-m-d\TH:i:sP") : null)}'
+    'location':
+      type: 'string'
+      ui:
+        label: 'Locatie naam'
+        inspector:
+          group: location
+    'locationDescription':
+      type: 'string'
+      ui:
+        label: 'Locatie omschrijving'
+        inspector:
+          group: location
+          editor: 'TYPO3.Neos/Inspector/Editors/TextAreaEditor'
+          editorOptions:
+            rows: 7
+    'address':
+      type: 'string'
+      ui:
+        label: 'Adres'
+        inspector:
+          group: address
+    'zipCode':
+      type: 'string'
+      ui:
+        label: 'Postcode'
+        inspector:
+          group: address
+    'city':
+      type: 'string'
+      ui:
+        label: 'Stad'
+        inspector:
+          group: address
+    'attendees':
+      type: 'references'
+      ui:
+        label: 'Aanwezigen'
+        inspector:
+          group: event
+          editorOptions:
+            nodeTypes: ['BuJitsuDo.Authentication:Person']
+
+
+'BJD.Events:Exam':
+  superTypes:
+    - 'BJD.Events:Event'
+  ui:
+    label: 'BJD Examen'
+    icon: 'icon-star-half-empty'
+    inspector:
+      groups:
+        event:
+          label: 'BJD Examen'
+  properties:
+    type:
+      type: 'string'
+      label: 'Type'
+      ui:
+        inspector:
+          group: event
+          editor: 'TYPO3.Neos/Inspector/Editors/SelectBoxEditor'
+          editorOptions:
+            placeholder: 'Kies een type'
+            values:
+              'Bu Jitsu Do':
+                label: 'Bu Jitsu Do'
+              'Jiu Jitsu':
+                label: 'Jiu Jitsu'

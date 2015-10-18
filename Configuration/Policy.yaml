@@ -1,0 +1,20 @@
+privilegeTargets:
+
+  'TYPO3\Flow\Security\Authorization\Privilege\Method\MethodPrivilege':
+
+    'BJD_Events':
+      matcher: 'method(BJD\Events\Controller\EventController->(addAttendee|removeAttendee)Action())'
+
+roles:
+
+  'TYPO3.Flow:AuthenticatedUser':
+    privileges:
+      -
+       privilegeTarget: 'BJD_Events'
+       permission: GRANT
+
+  'BuJitsuDo.Authentication:User':
+    privileges:
+      -
+       privilegeTarget: 'BJD_Events'
+       permission: GRANT
