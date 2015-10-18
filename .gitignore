@@ -1,1 +1,10 @@
 Reports/*
+bower_components/
+node_modules/
+.sass-cache/
+npm-debug.log
+beard.lock
+
+!/Build/Grunt
+node_modules
+bower_components
