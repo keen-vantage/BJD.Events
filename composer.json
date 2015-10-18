@@ -1,0 +1,16 @@
+{
+  "name": "keenvantage/bjd-events",
+  "type": "typo3-flow-package",
+  "license": "MIT",
+  "description": "Neos package to add Agenda for events and exams for the BU JITSU DO website",
+  "require": {
+    "typo3/flow": "*",
+    "typo3/neos": "*",
+    "typo3/typo3cr": "*"
+  },
+  "autoload": {
+    "psr-0": {
+      "Nieuwenhuizen\\CR": "Classes"
+    }
+  }
+}

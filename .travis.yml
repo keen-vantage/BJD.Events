@@ -1,0 +1,21 @@
+language: php
+php:
+  - 5.5
+  - 5.6
+  - 7.0
+  - hhvm
+matrix:
+  allow_failures:
+    - php: 7.0
+    - php: hhvm
+before_install:
+  - cd ..
+  - git clone https://github.com/neos/neos-base-distribution.git
+  - cd neos-base-distribution
+  - git checkout 2.0.0
+  - composer update
+install:
+  - mv ../Nieuwenhuizen.CR Packages/Application
+script:
+  - bin/phpunit -c Packages/Application/BJD.Events/UnitTests.xml
+  - bin/phpunit --stop-on-failure -c Packages/Application/BJD.Events/UnitTests.xml --testsuite "BJD.Events tests"
