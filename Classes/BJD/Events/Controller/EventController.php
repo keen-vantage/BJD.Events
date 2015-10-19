@@ -4,6 +4,7 @@ namespace BJD\Events\Controller;
 use BJD\Events\Service\EventService;
 use BuJitsuDo\Authentication\Service\ProfileService;
 use TYPO3\Flow\Annotations as Flow;
+use TYPO3\Flow\Log\SystemLoggerInterface;
 use TYPO3\Flow\Mvc\Controller\ActionController;
 use TYPO3\TYPO3CR\Domain\Service\ContextFactory;
 
@@ -28,6 +29,12 @@ class EventController extends ActionController {
     protected $contextFactory;
 
     /**
+     * @Flow\Inject
+     * @var SystemLoggerInterface
+     */
+    protected $systemLogger;
+
+    /**
      * Add attendee to event
      *
      * @param string $event
@@ -48,9 +55,7 @@ class EventController extends ActionController {
             $this->response->setHeader('NotificationType', 'success');
             $this->response->setHeader('NotificationIcon', 'fa-check');
         } catch (\Exception $exception) {
-            $this->response->setHeader('Notification', $exception->getMessage());
-            $this->response->setHeader('NotificationType', 'alert');
-            $this->response->setHeader('NotificationIcon', 'fa-close');
+            $this->systemLogger->log($exception->getMessage(), LOG_ALERT);
         }
         return '';
     }
@@ -74,9 +79,7 @@ class EventController extends ActionController {
             $this->response->setHeader('NotificationType', 'success');
             $this->response->setHeader('NotificationIcon', 'fa-check');
         } catch (\Exception $exception) {
-            $this->response->setHeader('Notification', $exception->getMessage());
-            $this->response->setHeader('NotificationType', 'alert');
-            $this->response->setHeader('NotificationIcon', 'fa-close');
+            $this->systemLogger->log($exception->getMessage(), LOG_ALERT);
         }
         return '';
     }
