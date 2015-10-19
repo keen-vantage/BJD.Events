@@ -18,26 +18,26 @@
 					<f:then>
 						<bjd:event.isRegisteredForEvent event="{event}">
 							<f:then>
-								<f:link.action additionalAttributes="{data-action: 'remove-from-event'}" action="removeAttendee" controller="Event" package="Nieuwenhuizen.BuJitsuDo" arguments="{event: event.identifier}">
+								<f:link.action additionalAttributes="{data-action: 'remove-from-event'}" action="removeAttendee" controller="Event" package="BJD.Events" arguments="{event: event.identifier}">
 									<button class="small">
 										<i class="fa fa-min"></i> Meld je af
 									</button>
 								</f:link.action>
 
-								<f:link.action class="hide" additionalAttributes="{data-action: 'add-to-event'}" action="addAttendee" controller="Event" package="Nieuwenhuizen.BuJitsuDo" arguments="{event: event.identifier}">
+								<f:link.action class="hide" additionalAttributes="{data-action: 'add-to-event'}" action="addAttendee" controller="Event" package="BJD.Events" arguments="{event: event.identifier}">
 									<button class="small">
 										<i class="fa fa-plus"></i> Ik kom ook!
 									</button>
 								</f:link.action>
 							</f:then>
 							<f:else>
-								<f:link.action additionalAttributes="{data-action: 'add-to-event'}" action="addAttendee" controller="Event" package="Nieuwenhuizen.BuJitsuDo" arguments="{event: event.identifier}">
+								<f:link.action additionalAttributes="{data-action: 'add-to-event'}" action="addAttendee" controller="Event" package="BJD.Events" arguments="{event: event.identifier}">
 									<button class="small">
 										<i class="fa fa-plus"></i> Ik kom ook!
 									</button>
 								</f:link.action>
 
-								<f:link.action class="hide" additionalAttributes="{data-action: 'remove-from-event'}" action="removeAttendee" controller="Event" package="Nieuwenhuizen.BuJitsuDo" arguments="{event: event.identifier}">
+								<f:link.action class="hide" additionalAttributes="{data-action: 'remove-from-event'}" action="removeAttendee" controller="Event" package="BJD.Events" arguments="{event: event.identifier}">
 									<button class="small">
 										<i class="fa fa-min"></i> Meld je af
 									</button>

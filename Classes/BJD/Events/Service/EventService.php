@@ -171,7 +171,7 @@ class EventService {
      * @throws \Exception
      */
     protected function getEventsAndPersonData(NodeInterface $event, NodeInterface $person) {
-        if ($event->getNodeType()->getName() !== 'Nieuwenhuizen.BuJitsuDo:Event' && $person->getNodeType()->getName() !== 'BuJitsuDo.Authentication:Person') {
+        if ($event->getNodeType()->getName() !== 'BJD.Events:Event' && $person->getNodeType()->getName() !== 'BuJitsuDo.Authentication:Person') {
             throw new \Exception('Not an event and/or person given', 12389172498);
         }
         if (!empty($person->getProperty('events'))) {
