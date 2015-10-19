@@ -1,0 +1,23 @@
+-
+  name: 'Add attendee to event'
+  uriPattern: 'add-to-bjd-event/{event}(/{person})'
+  defaults:
+    '@package': 'BJD.Events'
+    '@controller': 'Event'
+    '@action': 'addAttendee'
+    '@format': 'html'
+    'person': ''
+  httpMethods:
+    - 'PUT'
+
+-
+  name: 'Add attendee to event'
+  uriPattern: 'remove-from-bjd-event/{event}(/{person})'
+  defaults:
+    '@package': 'BJD.Events'
+    '@controller': 'Event'
+    '@action': 'removeAttendee'
+    '@format': 'html'
+    'person': ''
+  httpMethods:
+    - 'PUT'
