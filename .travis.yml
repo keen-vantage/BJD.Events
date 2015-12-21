@@ -15,7 +15,7 @@ before_install:
   - git checkout 2.0.0
   - composer update
 install:
-  - mv ../Nieuwenhuizen.CR Packages/Application
+  - mv ../BJD.Events Packages/Application
 script:
   - bin/phpunit -c Packages/Application/BJD.Events/UnitTests.xml
   - bin/phpunit --stop-on-failure -c Packages/Application/BJD.Events/UnitTests.xml --testsuite "BJD.Events tests"
