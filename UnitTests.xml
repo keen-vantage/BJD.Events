@@ -1,5 +1,6 @@
 <?xml version="1.0"?>
 <phpunit
+	colors="true"
 	bootstrap="../../../Build/BuildEssentials/PhpUnit/UnitTestBootstrap.php"
 	beStrictAboutChangesToGlobalState="true"
 	beStrictAboutTestsThatDoNotTestAnything="true"
@@ -13,14 +14,18 @@
 		<testsuite name="All tests">
 			<directory>../../../Packages/Application/BJD.Events/Tests/Unit</directory>
 			<exclude>../../../Packages/Libraries</exclude>
+			<exclude>../../../Packages/Application</exclude>
+			<exclude>../../../Packages/Framework</exclude>
 		</testsuite>
 	</testsuites>
 	<filter>
 		<whitelist addUncoveredFilesFromWhitelist="false">
-			<directory>../../../Packages/*/*/Classes</directory>
+			<directory>../../../Packages/Application/BJD.Events/Classes</directory>
 		</whitelist>
 	</filter>
 	<logging>
-		<log type="junit" target="./Reports/UnitTests.xml" logIncompleteSkipped="false"/>
+		<log type="coverage-html" target="../../../Web/event-coverage" charset="UTF-8" yui="true" highlight="false" lowUpperBound="35" highLowerBound="70"/>
+		<log type="coverage-clover" target="./Build/logs/clover.xml"/>
+		<log type="junit" target="./Build/logs/UnitTests.xml" logIncompleteSkipped="false"/>
 	</logging>
 </phpunit>

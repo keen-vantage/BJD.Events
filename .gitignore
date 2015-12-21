@@ -6,3 +6,4 @@ npm-debug.log
 beard.lock
 !/Build/Grunt
 Resources/Public/
+Build/Logs/
