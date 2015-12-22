@@ -1,11 +1,11 @@
 <?php
+
 namespace BJD\Events\Tests\Unit\Controller;
 
 use TYPO3\Flow\Tests\BaseTestCase;
 
 class EventControllerTest extends BaseTestCase
 {
-
     /**
      * @test
      */
@@ -157,5 +157,4 @@ class EventControllerTest extends BaseTestCase
 
         $this->assertEquals('', $eventControllerMock->removeAttendeeAction('eventId', 'profileId'));
     }
-
 }

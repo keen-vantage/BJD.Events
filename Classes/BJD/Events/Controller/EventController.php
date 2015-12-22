@@ -1,4 +1,5 @@
 <?php
+
 namespace BJD\Events\Controller;
 
 use BJD\Events\Service\EventService;
@@ -8,40 +9,46 @@ use TYPO3\Flow\Log\SystemLoggerInterface;
 use TYPO3\Flow\Mvc\Controller\ActionController;
 use TYPO3\TYPO3CR\Domain\Service\ContextFactory;
 
-class EventController extends ActionController {
-
+class EventController extends ActionController
+{
     /**
      * @Flow\Inject
+     *
      * @var EventService
      */
     protected $eventService;
 
     /**
      * @Flow\Inject
+     *
      * @var ProfileService
      */
     protected $profileService;
 
     /**
      * @Flow\Inject
+     *
      * @var ContextFactory
      */
     protected $contextFactory;
 
     /**
      * @Flow\Inject
+     *
      * @var SystemLoggerInterface
      */
     protected $systemLogger;
 
     /**
-     * Add attendee to event
+     * Add attendee to event.
      *
      * @param string $event
      * @param string $person
+     *
      * @return string
      */
-    public function addAttendeeAction($event, $person = '') {
+    public function addAttendeeAction($event, $person = '')
+    {
         try {
             $context = $this->contextFactory->create([]);
             if ($person === '') {
@@ -57,15 +64,18 @@ class EventController extends ActionController {
         } catch (\Exception $exception) {
             $this->systemLogger->log($exception->getMessage(), LOG_ALERT);
         }
+
         return '';
     }
 
     /**
      * @param string $event
      * @param string $person
+     *
      * @return string
      */
-    public function removeAttendeeAction($event, $person = '') {
+    public function removeAttendeeAction($event, $person = '')
+    {
         try {
             $context = $this->contextFactory->create([]);
             if ($person === '') {
@@ -81,7 +91,7 @@ class EventController extends ActionController {
         } catch (\Exception $exception) {
             $this->systemLogger->log($exception->getMessage(), LOG_ALERT);
         }
+
         return '';
     }
-
 }
