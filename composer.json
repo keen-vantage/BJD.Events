@@ -7,6 +7,7 @@
     "typo3/flow": "*",
     "typo3/neos": "*",
     "typo3/typo3cr": "*",
+    "bujitsudo/authentication": "*",
     "nieuwenhuizen/cr": "*"
   },
   "autoload": {
