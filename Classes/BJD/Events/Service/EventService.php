@@ -1,4 +1,5 @@
 <?php
+
 namespace BJD\Events\Service;
 
 use BuJitsuDo\Authentication\Service\MailerService;
@@ -8,34 +9,39 @@ use TYPO3\Flow\Annotations as Flow;
 use TYPO3\Flow\Persistence\Doctrine\PersistenceManager;
 use TYPO3\TYPO3CR\Domain\Model\NodeInterface;
 
-class EventService {
-
+class EventService
+{
     /**
      * @Flow\Inject
+     *
      * @var ProfileService
      */
     protected $profileService;
 
     /**
      * @Flow\Inject
+     *
      * @var NodeWriteRepository
      */
     protected $nodeWriteRepository;
 
     /**
      * @Flow\Inject
+     *
      * @var PersistenceManager
      */
     protected $persistenceManager;
 
     /**
      * @Flow\Inject
+     *
      * @var MailerService
      */
     protected $mailerService;
 
     /**
      * @Flow\Inject(setting="notifications.mail", package="BJD.Events")
+     *
      * @var array
      */
     protected $eventMailSettings;
@@ -43,10 +49,13 @@ class EventService {
     /**
      * @param NodeInterface $event
      * @param NodeInterface $person
+     *
      * @throws \Exception
+     *
      * @return void
      */
-    public function addAttendeeToEvent(NodeInterface $event, NodeInterface $person) {
+    public function addAttendeeToEvent(NodeInterface $event, NodeInterface $person)
+    {
         $personAndEventData = $this->getEventsAndPersonData($event, $person);
 
         $attendeeIdentifiers = $personAndEventData['attendeeIdentifiers'];
@@ -54,13 +63,13 @@ class EventService {
         $personEvents = $personAndEventData['personEvents'];
         $attendees = $personAndEventData['attendees'];
 
-        if (!in_array($person->getIdentifier(), $attendeeIdentifiers, TRUE)) {
+        if (!in_array($person->getIdentifier(), $attendeeIdentifiers, true)) {
             $attendees[] = $person;
         } else {
             throw new \Exception('User is already set in attendees', 1289312397);
         }
 
-        if (!(in_array($event->getIdentifier(), $personEventsIdentifiers, TRUE))) {
+        if (!(in_array($event->getIdentifier(), $personEventsIdentifiers, true))) {
             $personEvents[] = $event;
         } else {
             throw new \Exception('Event is already registered for user', 19786757512);
@@ -75,9 +84,11 @@ class EventService {
     /**
      * @param NodeInterface $event
      * @param NodeInterface $person
+     *
      * @throws \Exception
      */
-    public function removeAttendeeFromEvent(NodeInterface $event, NodeInterface $person) {
+    public function removeAttendeeFromEvent(NodeInterface $event, NodeInterface $person)
+    {
         $personAndEventData = $this->getEventsAndPersonData($event, $person);
 
         $attendeeIdentifiers = $personAndEventData['attendeeIdentifiers'];
@@ -85,7 +96,7 @@ class EventService {
         $personEvents = $personAndEventData['personEvents'];
         $attendees = $personAndEventData['attendees'];
 
-        if (in_array($person->getIdentifier(), $attendeeIdentifiers, TRUE)) {
+        if (in_array($person->getIdentifier(), $attendeeIdentifiers, true)) {
             $keyToRemove = [];
             foreach ($attendees as $key => $attendee) {
                 /** @var NodeInterface $attendee */
@@ -104,10 +115,9 @@ class EventService {
             throw new \Exception('User is not set in attendees', 15131262534);
         }
 
-
-        if (in_array($event->getIdentifier(), $personEventsIdentifiers, TRUE)) {
+        if (in_array($event->getIdentifier(), $personEventsIdentifiers, true)) {
             $keyToRemove = [];
-            foreach($personEvents as $key => $personEvent) {
+            foreach ($personEvents as $key => $personEvent) {
                 /** @var NodeInterface $personEvent */
                 if ($personEvent->getIdentifier() === $event->getIdentifier()) {
                     $keyToRemove[] = $key;
@@ -133,16 +143,18 @@ class EventService {
     /**
      * @param NodeInterface $event
      * @param NodeInterface $person
+     *
      * @return void
      */
-    public function sendNewAttendeeEmail(NodeInterface $event, NodeInterface $person) {
+    public function sendNewAttendeeEmail(NodeInterface $event, NodeInterface $person)
+    {
         $this->mailerService->sendEmail(
             $this->eventMailSettings,
-            'Nieuwe aanmelding voor ' . $event->getLabel(),
+            'Nieuwe aanmelding voor '.$event->getLabel(),
             $this->eventMailSettings['templates']['newAttendee'],
             [
                 'person' => $person,
-                'event' => $event
+                'event'  => $event,
             ]
         );
     }
@@ -150,16 +162,18 @@ class EventService {
     /**
      * @param NodeInterface $event
      * @param NodeInterface $person
+     *
      * @return void
      */
-    public function sendAttendeeRemovedEmail(NodeInterface $event, NodeInterface $person) {
+    public function sendAttendeeRemovedEmail(NodeInterface $event, NodeInterface $person)
+    {
         $this->mailerService->sendEmail(
             $this->eventMailSettings,
-            'Afmelding voor ' . $event->getLabel(),
+            'Afmelding voor '.$event->getLabel(),
             $this->eventMailSettings['templates']['removedAttendee'],
             [
                 'person' => $person,
-                'event' => $event
+                'event'  => $event,
             ]
         );
     }
@@ -167,10 +181,13 @@ class EventService {
     /**
      * @param NodeInterface $event
      * @param NodeInterface $person
-     * @return array
+     *
      * @throws \Exception
+     *
+     * @return array
      */
-    protected function getEventsAndPersonData(NodeInterface $event, NodeInterface $person) {
+    protected function getEventsAndPersonData(NodeInterface $event, NodeInterface $person)
+    {
         if ($event->getNodeType()->getName() !== 'BJD.Events:Event' && $person->getNodeType()->getName() !== 'BuJitsuDo.Authentication:Person') {
             throw new \Exception('Not an event and/or person given', 12389172498);
         }
@@ -189,18 +206,19 @@ class EventService {
         $attendeeIdentifiers = [];
 
         foreach ($attendees as $attendee) {
-            /** @var NodeInterface $attendee */
+            /* @var NodeInterface $attendee */
             $attendeeIdentifiers[] = $attendee->getIdentifier();
         }
         foreach ($personEvents as $personEvent) {
-            /** @var NodeInterface $personEvent */
+            /* @var NodeInterface $personEvent */
             $personEventsIdentifiers[] = $personEvent->getIdentifier();
         }
+
         return [
-            'personEvents' => $personEvents,
+            'personEvents'            => $personEvents,
             'personEventsIdentifiers' => $personEventsIdentifiers,
-            'attendees' => $attendees,
-            'attendeeIdentifiers' => $attendeeIdentifiers
+            'attendees'               => $attendees,
+            'attendeeIdentifiers'     => $attendeeIdentifiers,
         ];
     }
 
@@ -208,18 +226,21 @@ class EventService {
      * @param NodeInterface $event
      * @param NodeInterface $person
      * @Flow\Signal
+     *
      * @return void
      */
-    protected function emitAttendeeAdded(NodeInterface $event, NodeInterface $person) {
+    protected function emitAttendeeAdded(NodeInterface $event, NodeInterface $person)
+    {
     }
 
     /**
      * @param NodeInterface $event
      * @param NodeInterface $person
      * @Flow\Signal
+     *
      * @return void
      */
-    protected function emitAttendeeRemoved(NodeInterface $event, NodeInterface $person) {
+    protected function emitAttendeeRemoved(NodeInterface $event, NodeInterface $person)
+    {
     }
-
 }
