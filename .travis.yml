@@ -12,6 +12,9 @@ before_install:
   - cd neos-base-distribution
   - git checkout 2.0.0
   - composer update
+  - cd Packages/Application
+  - git clone git@github.com:keen-vantage/BuJitsuDo.Authentication.git
+  - cd ../../
 install:
   - mv ../BJD.Events Packages/Application
 script:
