@@ -11,7 +11,8 @@ before_install:
   - git clone https://github.com/neos/neos-base-distribution.git
   - cd neos-base-distribution
   - git checkout 2.0.0
-  - composer update
+  - composer update --dev
+  - composer require codeclimate/php-test-reporter:dev-master --dev
   - cd Packages/Application
   - git clone https://github.com/keen-vantage/BuJitsuDo.Authentication.git
   - cd ../../
@@ -20,3 +21,5 @@ install:
 script:
   - bin/phpunit -c Packages/Application/BJD.Events/UnitTests.xml
   - bin/phpunit --stop-on-failure -c Packages/Application/BJD.Events/UnitTests.xml --testsuite "BJD.Events tests"
+  - cd Packages/Application/BJD.Events
+  - ../../../bin/test-reporter
