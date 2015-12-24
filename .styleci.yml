@@ -7,6 +7,9 @@ disabled:
   - phpdoc_align
   - align_double_arrow
   - multiline_array_trailing_comma
+  - single_blank_line_before_namespace
+  - no_blank_lines_after_class_opening
 
 enabled:
   - concat_with_spaces
+  - no_blank_lines_before_namespace

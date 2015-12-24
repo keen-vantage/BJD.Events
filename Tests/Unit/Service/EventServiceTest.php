@@ -83,4 +83,5 @@ class EventServiceTest extends BaseTestCase
 
         $mockEventService->addAttendeeToEvent($mockEvent, $mockPerson);
     }
+
 }
