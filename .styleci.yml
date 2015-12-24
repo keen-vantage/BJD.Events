@@ -6,6 +6,7 @@ disabled:
   - concat_without_spaces
   - phpdoc_align
   - align_double_arrow
+  - multiline_array_trailing_comma
 
 enabled:
   - concat_with_spaces
