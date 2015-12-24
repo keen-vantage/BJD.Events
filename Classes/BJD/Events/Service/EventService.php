@@ -79,50 +79,13 @@ class EventService
     /**
      * @param NodeInterface $event
      * @param NodeInterface $person
-     *
-     * @throws \Exception
      */
     public function removeAttendeeFromEvent(NodeInterface $event, NodeInterface $person)
     {
         $personAndEventData = $this->getEventsAndPersonData($event, $person);
 
-        if (in_array($person->getIdentifier(), $personAndEventData['attendeeIdentifiers'], true)) {
-            $keyToRemove = [];
-            foreach ($personAndEventData['attendees'] as $key => $attendee) {
-                /** @var NodeInterface $attendee */
-                if ($attendee->getIdentifier() === $person->getIdentifier()) {
-                    $keyToRemove[] = $key;
-                } else {
-                    continue;
-                }
-            }
-            if ($keyToRemove !== []) {
-                foreach ($keyToRemove as $key) {
-                    unset($personAndEventData['attendees'][$key]);
-                }
-            }
-        } else {
-            throw new \Exception('User is not set in attendees', 15131262534);
-        }
-
-        if (in_array($event->getIdentifier(), $personAndEventData['personEventsIdentifiers'], true)) {
-            $keyToRemove = [];
-            foreach ($personAndEventData['personEvents'] as $key => $personEvent) {
-                /** @var NodeInterface $personEvent */
-                if ($personEvent->getIdentifier() === $event->getIdentifier()) {
-                    $keyToRemove[] = $key;
-                } else {
-                    continue;
-                }
-            }
-            if ($keyToRemove !== []) {
-                foreach ($keyToRemove as $key) {
-                    unset($personAndEventData['personEvents'][$key]);
-                }
-            }
-        } else {
-            throw new \Exception('Event is not registered for user', 12415423123);
-        }
+        $this->removeEventFromUser($person, $personAndEventData, 'attendeeIdentifiers', 'attendees', 'User is not set in attendees');
+        $this->removeEventFromUser($person, $personAndEventData, 'personEventsIdentifiers', 'personEvents', 'Event is not registered for user');
 
         $this->nodeWriteRepository->updateNode($person, ['events' => $personAndEventData['personEvents']]);
         $this->nodeWriteRepository->updateNode($event, ['attendees' => $personAndEventData['attendees']]);
@@ -186,7 +149,7 @@ class EventService
         } else {
             $personEvents = [];
         }
-        $personEventsIdentifiers = [];
+        $eventIdentifiers = [];
 
         if (!empty($event->getProperty('attendees'))) {
             $attendees = $event->getProperty('attendees');
@@ -201,15 +164,46 @@ class EventService
         }
         foreach ($personEvents as $personEvent) {
             /* @var NodeInterface $personEvent */
-            $personEventsIdentifiers[] = $personEvent->getIdentifier();
+            $eventIdentifiers[] = $personEvent->getIdentifier();
         }
 
         return [
             'personEvents'            => $personEvents,
-            'personEventsIdentifiers' => $personEventsIdentifiers,
+            'personEventsIdentifiers' => $eventIdentifiers,
             'attendees'               => $attendees,
             'attendeeIdentifiers'     => $attendeeIdentifiers,
         ];
+    }
+
+    /**
+     * @param NodeInterface $node
+     * @param array $data
+     * @param string $identifiersToCheck
+     * @param string $dataToClear
+     * @param string $exceptionMessage
+     *
+     * @throws \Exception
+     */
+    protected function removeEventFromUser(NodeInterface $node, array &$data, $identifiersToCheck = 'personEventsIdentifiers', $dataToClear = 'personEvents', $exceptionMessage = '')
+    {
+        if (in_array($node->getIdentifier(), $data[$identifiersToCheck], true)) {
+            $keyToRemove = [];
+            foreach ($data[$dataToClear] as $key => $personEvent) {
+                /** @var NodeInterface $personEvent */
+                if ($personEvent->getIdentifier() === $node->getIdentifier()) {
+                    $keyToRemove[] = $key;
+                } else {
+                    continue;
+                }
+            }
+            if ($keyToRemove !== []) {
+                foreach ($keyToRemove as $key) {
+                    unset($data[$dataToClear][$key]);
+                }
+            }
+        } else {
+            throw new \Exception($exceptionMessage, 12415423123);
+        }
     }
 
     /**

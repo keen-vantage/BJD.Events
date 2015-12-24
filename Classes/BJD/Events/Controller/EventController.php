@@ -92,6 +92,7 @@ class EventController extends ActionController
     /**
      * @param string $personIdentifier
      * @param Context $context
+     *
      * @throws \Exception
      *
      * @return NodeInterface
@@ -103,6 +104,7 @@ class EventController extends ActionController
         } else {
             $person = $context->getNodeByIdentifier($personIdentifier);
         }
+
         return $person;
     }
 }
