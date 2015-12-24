@@ -103,7 +103,7 @@ class EventService
     {
         $this->mailerService->sendEmail(
             $this->eventMailSettings,
-            'Nieuwe aanmelding voor '.$event->getLabel(),
+            'Nieuwe aanmelding voor ' . $event->getLabel(),
             $this->eventMailSettings['templates']['newAttendee'],
             [
                 'person' => $person,
@@ -122,7 +122,7 @@ class EventService
     {
         $this->mailerService->sendEmail(
             $this->eventMailSettings,
-            'Afmelding voor '.$event->getLabel(),
+            'Afmelding voor ' . $event->getLabel(),
             $this->eventMailSettings['templates']['removedAttendee'],
             [
                 'person' => $person,
