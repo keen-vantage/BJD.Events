@@ -5,6 +5,8 @@ linting: true
 disabled:
   - concat_without_spaces
   - phpdoc_align
+  - align_double_arrow
+  - align_equals
 
 enabled:
   - concat_with_spaces
