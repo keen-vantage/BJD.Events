@@ -58,25 +58,20 @@ class EventService
     {
         $personAndEventData = $this->getEventsAndPersonData($event, $person);
 
-        $attendeeIdentifiers = $personAndEventData['attendeeIdentifiers'];
-        $personEventsIdentifiers = $personAndEventData['personEventsIdentifiers'];
-        $personEvents = $personAndEventData['personEvents'];
-        $attendees = $personAndEventData['attendees'];
-
-        if (!in_array($person->getIdentifier(), $attendeeIdentifiers, true)) {
-            $attendees[] = $person;
+        if (!in_array($person->getIdentifier(), $personAndEventData['attendeeIdentifiers'], true)) {
+            $personAndEventData['attendees'][] = $person;
         } else {
             throw new \Exception('User is already set in attendees', 1289312397);
         }
 
-        if (!(in_array($event->getIdentifier(), $personEventsIdentifiers, true))) {
-            $personEvents[] = $event;
+        if (!(in_array($event->getIdentifier(), $personAndEventData['personEventsIdentifiers'], true))) {
+            $personAndEventData['personEvents'][] = $event;
         } else {
             throw new \Exception('Event is already registered for user', 19786757512);
         }
 
-        $this->nodeWriteRepository->updateNode($person, ['events' => $personEvents]);
-        $this->nodeWriteRepository->updateNode($event, ['attendees' => $attendees]);
+        $this->nodeWriteRepository->updateNode($person, ['events' => $personAndEventData['personEvents']]);
+        $this->nodeWriteRepository->updateNode($event, ['attendees' => $personAndEventData['attendees']]);
         $this->persistenceManager->persistAll();
         $this->emitAttendeeAdded($event, $person);
     }
@@ -91,14 +86,9 @@ class EventService
     {
         $personAndEventData = $this->getEventsAndPersonData($event, $person);
 
-        $attendeeIdentifiers = $personAndEventData['attendeeIdentifiers'];
-        $personEventsIdentifiers = $personAndEventData['personEventsIdentifiers'];
-        $personEvents = $personAndEventData['personEvents'];
-        $attendees = $personAndEventData['attendees'];
-
-        if (in_array($person->getIdentifier(), $attendeeIdentifiers, true)) {
+        if (in_array($person->getIdentifier(), $personAndEventData['attendeeIdentifiers'], true)) {
             $keyToRemove = [];
-            foreach ($attendees as $key => $attendee) {
+            foreach ($personAndEventData['attendees'] as $key => $attendee) {
                 /** @var NodeInterface $attendee */
                 if ($attendee->getIdentifier() === $person->getIdentifier()) {
                     $keyToRemove[] = $key;
@@ -108,16 +98,16 @@ class EventService
             }
             if ($keyToRemove !== []) {
                 foreach ($keyToRemove as $key) {
-                    unset($attendees[$key]);
+                    unset($personAndEventData['attendees'][$key]);
                 }
             }
         } else {
             throw new \Exception('User is not set in attendees', 15131262534);
         }
 
-        if (in_array($event->getIdentifier(), $personEventsIdentifiers, true)) {
+        if (in_array($event->getIdentifier(), $personAndEventData['personEventsIdentifiers'], true)) {
             $keyToRemove = [];
-            foreach ($personEvents as $key => $personEvent) {
+            foreach ($personAndEventData['personEvents'] as $key => $personEvent) {
                 /** @var NodeInterface $personEvent */
                 if ($personEvent->getIdentifier() === $event->getIdentifier()) {
                     $keyToRemove[] = $key;
@@ -127,15 +117,15 @@ class EventService
             }
             if ($keyToRemove !== []) {
                 foreach ($keyToRemove as $key) {
-                    unset($personEvents[$key]);
+                    unset($personAndEventData['personEvents'][$key]);
                 }
             }
         } else {
             throw new \Exception('Event is not registered for user', 12415423123);
         }
 
-        $this->nodeWriteRepository->updateNode($person, ['events' => $personEvents]);
-        $this->nodeWriteRepository->updateNode($event, ['attendees' => $attendees]);
+        $this->nodeWriteRepository->updateNode($person, ['events' => $personAndEventData['personEvents']]);
+        $this->nodeWriteRepository->updateNode($event, ['attendees' => $personAndEventData['attendees']]);
         $this->persistenceManager->persistAll();
         $this->emitAttendeeRemoved($event, $person);
     }
