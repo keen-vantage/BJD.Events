@@ -60,9 +60,6 @@ class EventController extends ActionController
             $this->response->setHeader('NotificationType', 'success');
             $this->response->setHeader('NotificationIcon', 'fa-check');
         } catch (\Exception $exception) {
-            $this->response->setHeader('Notification', $exception->getMessage());
-            $this->response->setHeader('NotificationType', 'alert');
-            $this->response->setHeader('NotificationIcon', 'fa-close');
             $this->systemLogger->log($exception->getMessage(), LOG_ALERT);
         }
 
@@ -86,9 +83,6 @@ class EventController extends ActionController
             $this->response->setHeader('NotificationType', 'success');
             $this->response->setHeader('NotificationIcon', 'fa-check');
         } catch (\Exception $exception) {
-            $this->response->setHeader('Notification', $exception->getMessage());
-            $this->response->setHeader('NotificationType', 'alert');
-            $this->response->setHeader('NotificationIcon', 'fa-close');
             $this->systemLogger->log($exception->getMessage(), LOG_ALERT);
         }
 
