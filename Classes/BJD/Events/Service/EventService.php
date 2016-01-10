@@ -85,7 +85,7 @@ class EventService
         $personAndEventData = $this->getEventsAndPersonData($event, $person);
 
         $this->removeEventFromUser($person, $personAndEventData, 'attendeeIdentifiers', 'attendees', 'User is not set in attendees');
-        $this->removeEventFromUser($person, $personAndEventData, 'personEventsIdentifiers', 'personEvents', 'Event is not registered for user');
+        $this->removeEventFromUser($event, $personAndEventData, 'personEventsIdentifiers', 'personEvents', 'Event is not registered for user');
 
         $this->nodeWriteRepository->updateNode($person, ['events' => $personAndEventData['personEvents']]);
         $this->nodeWriteRepository->updateNode($event, ['attendees' => $personAndEventData['attendees']]);
