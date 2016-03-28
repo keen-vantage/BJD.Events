@@ -1,3 +1,6 @@
 include: Library/ContentTypes/*
 include: Library/DocumentTypes/*
 include: PrimaryContent.ts2
+
+prototype(TYPO3.TypoScript:GlobalCacheIdentifiers).month = ${request.arguments.month}
+prototype(TYPO3.TypoScript:GlobalCacheIdentifiers).year = ${request.arguments.year}

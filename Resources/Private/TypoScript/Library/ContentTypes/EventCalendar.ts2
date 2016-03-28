@@ -25,26 +25,4 @@ prototype(BJD.Events:EventCalendar) < prototype(TYPO3.Neos:Content) {
 
 	exams = ${DateSearch.query(this.site).nodeType('BJD.Events:Exam').filterAllFutureItems().sortAsc('start').fetch()}
 	events = ${DateSearch.query(this.site).nodeType('BJD.Events:Event').excludeNodeType().filterSingleMonth(this.month,this.year).sortAsc('start').fetch()}
-
-	selectedMonth.@cache {
-		mode = 'uncached'
-		context {
-			1 = 'node'
-		}
-	}
-	selectedYear.@cache {
-		mode = 'uncached'
-		context {
-			1 = 'node'
-		}
-	}
-
-	@cache {
-		mode = 'uncached'
-		context {
-			1 = 'node'
-			2 = 'documentNode'
-			3 = 'site'
-		}
-	}
 }
