@@ -5,7 +5,6 @@ use TYPO3\Flow\Tests\BaseTestCase;
 
 class EventServiceTest extends BaseTestCase
 {
-
     /**
      * @expectedException \Exception
      * @expectedExceptionMessage User is already set in attendees
@@ -83,5 +82,4 @@ class EventServiceTest extends BaseTestCase
 
         $mockEventService->addAttendeeToEvent($mockEvent, $mockPerson);
     }
-
 }

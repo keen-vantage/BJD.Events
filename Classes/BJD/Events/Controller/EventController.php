@@ -1,5 +1,4 @@
 <?php
-
 namespace BJD\Events\Controller;
 
 use BJD\Events\Service\EventService;
@@ -97,7 +96,7 @@ class EventController extends ActionController
      *
      * @return NodeInterface
      */
-    protected function getPersonProfile($personIdentifier = '', Context $context)
+    protected function getPersonProfile($personIdentifier, Context $context)
     {
         if ($personIdentifier === '') {
             $person = $this->profileService->getCurrentPartyProfile();
