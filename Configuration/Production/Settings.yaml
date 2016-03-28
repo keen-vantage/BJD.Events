@@ -1,0 +1,8 @@
+---
+
+BJD:
+  Events:
+    notifications:
+      mail:
+        name: 'Johan Brandsen'
+        email: 'info@bujitsudo.nl'
