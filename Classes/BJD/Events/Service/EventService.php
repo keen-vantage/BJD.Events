@@ -1,5 +1,4 @@
 <?php
-
 namespace BJD\Events\Service;
 
 use BuJitsuDo\Authentication\Service\MailerService;

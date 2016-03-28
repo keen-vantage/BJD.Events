@@ -1,5 +1,4 @@
 <?php
-
 namespace BJD\Events\Tests\Unit\Controller;
 
 use TYPO3\Flow\Tests\BaseTestCase;

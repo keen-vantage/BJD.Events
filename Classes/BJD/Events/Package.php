@@ -3,18 +3,19 @@ namespace BJD\Events;
 
 use TYPO3\Flow\Core\Bootstrap;
 use TYPO3\Flow\Package\Package as BasePackage;
-use TYPO3\Flow\Annotations as Flow;
 
 /**
- * Package
+ * Package.
  */
-class Package extends BasePackage {
-
+class Package extends BasePackage
+{
     /**
      * @param Bootstrap $bootstrap
+     *
      * @return void
      */
-    public function boot(Bootstrap $bootstrap) {
+    public function boot(Bootstrap $bootstrap)
+    {
         $dispatcher = $bootstrap->getSignalSlotDispatcher();
         $dispatcher->connect(
             'BJD\Events\Service\EventService', 'attendeeAdded',
@@ -25,5 +26,4 @@ class Package extends BasePackage {
             'BJD\Events\Service\EventService', 'sendAttendeeRemovedEmail'
         );
     }
-
 }
