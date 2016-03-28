@@ -1,5 +1,5 @@
 {namespace neos=TYPO3\Neos\ViewHelpers}
-{namespace bjd=Nieuwenhuizen\BuJitsuDo\ViewHelpers}
+{namespace events=BJD\Events\ViewHelpers}
 <f:if condition="{event.properties.address}">
 	<div class="row background-gray-light">
 		<div class="columns small-10 large-5 small-offset-1">
@@ -16,7 +16,7 @@
 			<p>
 				<f:security.ifAuthenticated>
 					<f:then>
-						<bjd:event.isRegisteredForEvent event="{event}">
+						<events:conditional.isRegisteredForEvent event="{event}">
 							<f:then>
 								<f:link.action additionalAttributes="{data-action: 'remove-from-event'}" action="removeAttendee" controller="Event" package="BJD.Events" arguments="{event: event.identifier}">
 									<button class="small">
@@ -43,7 +43,7 @@
 									</button>
 								</f:link.action>
 							</f:else>
-						</bjd:event.isRegisteredForEvent>
+						</events:conditional.isRegisteredForEvent>
 					</f:then>
 					<f:else>
 						<neos:link.node node="{login}">
