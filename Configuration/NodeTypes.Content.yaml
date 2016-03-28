@@ -4,4 +4,4 @@
   superTypes:
     - 'TYPO3.Neos:Content'
   ui:
-    label: 'BJD Evenementen'
+    label: 'Evenementen overzicht'
