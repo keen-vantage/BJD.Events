@@ -11,4 +11,15 @@ prototype(BJD.Events:EventCalendar) < prototype(TYPO3.Neos:Content) {
 
 	exams = ${Event.hidePastEvents(BudoDate.sortNodesByDate(q(site).find('[instanceof BJD.Events:Exam]').get(), 'start', false))}
 	events = ${Event.hidePastEvents(BudoDate.sortNodesByDate(q(site).find('[instanceof BJD.Events:Event][!instanceof BJD.Events:Exam]').get(), 'start', false))}
+
+
+	@cache {
+		mode = 'cached'
+		entryTags {
+			1 = ${'Node_' + documentNode.identifier}
+			2 = ${'DescendantOf_' + documentNode.identifier}
+			3 = ${'NodeType_BDJ.Events:Event'}
+			4 = ${'NodeType_BDJ.Events:Exam'}
+		}
+	}
 }
