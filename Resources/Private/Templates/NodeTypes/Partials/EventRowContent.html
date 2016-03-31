@@ -67,7 +67,14 @@
 						<h3>Kandidaten:</h3>
 						<ul>
 							<f:for each="{event.properties.attendees}" as="attendee">
-								<li>{attendee.label -> neos:link.node(node: attendee)} voor {attendee.nextDegree}</li>
+								<f:if condition="{event.properties.type} == 'Bu Jitsu Do'">
+									<f:then>
+										<li>{attendee.label -> neos:link.node(node: attendee)} voor {attendee.nextDegree}</li>
+									</f:then>
+									<f:else>
+										<li>{attendee.label -> neos:link.node(node: attendee)} voor {attendee.nextJiuJitsuDegree}</li>
+									</f:else>
+								</f:if>
 							</f:for>
 						</ul>
 					</div>
