@@ -12,30 +12,27 @@ use TYPO3\TYPO3CR\Domain\Service\ContextFactory;
 
 class EventController extends ActionController
 {
+
     /**
      * @Flow\Inject
-     *
      * @var EventService
      */
     protected $eventService;
 
     /**
      * @Flow\Inject
-     *
      * @var ProfileService
      */
     protected $profileService;
 
     /**
      * @Flow\Inject
-     *
      * @var ContextFactory
      */
     protected $contextFactory;
 
     /**
      * @Flow\Inject
-     *
      * @var SystemLoggerInterface
      */
     protected $systemLogger;
@@ -45,7 +42,6 @@ class EventController extends ActionController
      *
      * @param string $event
      * @param string $person
-     *
      * @return string
      */
     public function addAttendeeAction($event, $person = '')
@@ -68,7 +64,6 @@ class EventController extends ActionController
     /**
      * @param string $event
      * @param string $person
-     *
      * @return string
      */
     public function removeAttendeeAction($event, $person = '')
@@ -78,7 +73,8 @@ class EventController extends ActionController
             $person = $this->getPersonProfile($person, $context);
             $event = $context->getNodeByIdentifier($event);
             $this->eventService->removeAttendeeFromEvent($event, $person);
-            $this->response->setHeader('Notification', 'Jammer, maar je kunt je altijd weer aanmelden wanneer je je bedenkt!');
+            $this->response->setHeader('Notification',
+                'Jammer, maar je kunt je altijd weer aanmelden wanneer je je bedenkt!');
             $this->response->setHeader('NotificationType', 'success');
             $this->response->setHeader('NotificationIcon', 'fa-check');
         } catch (\Exception $exception) {
@@ -91,9 +87,7 @@ class EventController extends ActionController
     /**
      * @param string $personIdentifier
      * @param Context $context
-     *
      * @throws \Exception
-     *
      * @return NodeInterface
      */
     protected function getPersonProfile($personIdentifier, Context $context)

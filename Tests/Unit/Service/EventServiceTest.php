@@ -14,8 +14,8 @@ class EventServiceTest extends BaseTestCase
     public function exceptionIsThrownOnAddAttendeeOnEventIfUserIsAlreadyRegisteredInEvent()
     {
         $mockEventService = $this->getAccessibleMock('BJD\Events\Service\EventService', ['getEventsAndPersonData'], [], '', false);
-        $mockEvent = $this->getMock('TYPO3\TYPO3CR\Domain\Model\Node', [], [], '', false);
-        $mockPerson = $this->getMock('TYPO3\TYPO3CR\Domain\Model\Node', [], [], '', false);
+        $mockEvent = $this->createMock('TYPO3\TYPO3CR\Domain\Model\Node');
+        $mockPerson = $this->createMock('TYPO3\TYPO3CR\Domain\Model\Node');
 
         $personAndEventData = [
             'attendeeIdentifiers' => [
@@ -38,8 +38,8 @@ class EventServiceTest extends BaseTestCase
     public function exceptionIsThrownOnAddAttendeeOnEventIfEventIsAlreadyRegisteredInPerson()
     {
         $mockEventService = $this->getAccessibleMock('BJD\Events\Service\EventService', ['getEventsAndPersonData'], [], '', false);
-        $mockEvent = $this->getMock('TYPO3\TYPO3CR\Domain\Model\Node', [], [], '', false);
-        $mockPerson = $this->getMock('TYPO3\TYPO3CR\Domain\Model\Node', [], [], '', false);
+        $mockEvent = $this->createMock('TYPO3\TYPO3CR\Domain\Model\Node');
+        $mockPerson = $this->createMock('TYPO3\TYPO3CR\Domain\Model\Node');
 
         $personAndEventData = [
             'attendeeIdentifiers' => [],
@@ -61,10 +61,10 @@ class EventServiceTest extends BaseTestCase
     public function eventAndAttendeesAreUpdateOnAddAttendeeOnEventIfUserIsNotYetRegistered()
     {
         $mockEventService = $this->getAccessibleMock('BJD\Events\Service\EventService', ['getEventsAndPersonData'], [], '', false);
-        $mockEvent = $this->getMock('TYPO3\TYPO3CR\Domain\Model\Node', [], [], '', false);
-        $mockPerson = $this->getMock('TYPO3\TYPO3CR\Domain\Model\Node', [], [], '', false);
-        $mockNodeWriteRepository = $this->getMock('Nieuwenhuizen\CR\Domain\Repository\NodeWriteRepository', [], [], '', false);
-        $mockPersistenceManager = $this->getMock('TYPO3\Flow\Persistence\Doctrine\PersistenceManager', [], [], '', false);
+        $mockEvent = $this->createMock('TYPO3\TYPO3CR\Domain\Model\Node');
+        $mockPerson = $this->createMock('TYPO3\TYPO3CR\Domain\Model\Node');
+        $mockNodeWriteRepository = $this->createMock('Nieuwenhuizen\CR\Domain\Repository\NodeWriteRepository');
+        $mockPersistenceManager = $this->createMock('TYPO3\Flow\Persistence\Doctrine\PersistenceManager');
 
         $this->inject($mockEventService, 'nodeWriteRepository', $mockNodeWriteRepository);
         $this->inject($mockEventService, 'persistenceManager', $mockPersistenceManager);

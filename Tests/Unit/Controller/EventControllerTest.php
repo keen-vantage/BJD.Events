@@ -11,13 +11,13 @@ class EventControllerTest extends BaseTestCase
     public function ifNoPersonGivenTheCurrentPartyProfileWillBeUsedOnAddAttendee()
     {
         $eventControllerMock = $this->getAccessibleMock('BJD\Events\Controller\EventController', ['dummy'], [], '', false);
-        $profileServiceMock = $this->getMock('BuJitsuDo\Authentication\Service\ProfileService', [], [], '', false);
-        $contextFactoryMock = $this->getMock('TYPO3\TYPO3CR\Domain\Service\ContextFactory', [], [], '', false);
-        $responseMock = $this->getMock('TYPO3\Flow\Http\Response', [], [], '', false);
-        $contextMock = $this->getMock('TYPO3\TYPO3CR\Domain\Service\Context', [], [], '', false);
-        $profileNodeMock = $this->getMock('TYPO3\TYPO3CR\Domain\Model\NodeInterface', [], [], '', false);
-        $eventNodeMock = $this->getMock('TYPO3\TYPO3CR\Domain\Model\NodeInterface', [], [], '', false);
-        $eventServiceMock = $this->getMock('BJD\Events\Service\EventService', [], [], '', false);
+        $profileServiceMock = $this->createMock('BuJitsuDo\Authentication\Service\ProfileService');
+        $contextFactoryMock = $this->createMock('TYPO3\TYPO3CR\Domain\Service\ContextFactory');
+        $responseMock = $this->createMock('TYPO3\Flow\Http\Response');
+        $contextMock = $this->createMock('TYPO3\TYPO3CR\Domain\Service\Context');
+        $profileNodeMock = $this->createMock('TYPO3\TYPO3CR\Domain\Model\NodeInterface');
+        $eventNodeMock = $this->createMock('TYPO3\TYPO3CR\Domain\Model\NodeInterface');
+        $eventServiceMock = $this->createMock('BJD\Events\Service\EventService');
 
         $this->inject($eventControllerMock, 'profileService', $profileServiceMock);
         $this->inject($eventControllerMock, 'contextFactory', $contextFactoryMock);
@@ -39,13 +39,13 @@ class EventControllerTest extends BaseTestCase
     public function ifPersonGivenTheProfileWillBeSearchedOnIdOnAddAttendee()
     {
         $eventControllerMock = $this->getAccessibleMock('BJD\Events\Controller\EventController', ['dummy'], [], '', false);
-        $profileServiceMock = $this->getMock('BuJitsuDo\Authentication\Service\ProfileService', [], [], '', false);
-        $contextFactoryMock = $this->getMock('TYPO3\TYPO3CR\Domain\Service\ContextFactory', [], [], '', false);
-        $responseMock = $this->getMock('TYPO3\Flow\Http\Response', [], [], '', false);
-        $contextMock = $this->getMock('TYPO3\TYPO3CR\Domain\Service\Context', [], [], '', false);
-        $profileNodeMock = $this->getMock('TYPO3\TYPO3CR\Domain\Model\NodeInterface', [], [], '', false);
-        $eventNodeMock = $this->getMock('TYPO3\TYPO3CR\Domain\Model\NodeInterface', [], [], '', false);
-        $eventServiceMock = $this->getMock('BJD\Events\Service\EventService', [], [], '', false);
+        $profileServiceMock = $this->createMock('BuJitsuDo\Authentication\Service\ProfileService');
+        $contextFactoryMock = $this->createMock('TYPO3\TYPO3CR\Domain\Service\ContextFactory');
+        $responseMock = $this->createMock('TYPO3\Flow\Http\Response');
+        $contextMock = $this->createMock('TYPO3\TYPO3CR\Domain\Service\Context');
+        $profileNodeMock = $this->createMock('TYPO3\TYPO3CR\Domain\Model\NodeInterface');
+        $eventNodeMock = $this->createMock('TYPO3\TYPO3CR\Domain\Model\NodeInterface');
+        $eventServiceMock = $this->createMock('BJD\Events\Service\EventService');
 
         $this->inject($eventControllerMock, 'profileService', $profileServiceMock);
         $this->inject($eventControllerMock, 'contextFactory', $contextFactoryMock);
@@ -68,8 +68,8 @@ class EventControllerTest extends BaseTestCase
     public function exceptionIsLoggedWhenCaughtOnAddAttendee()
     {
         $eventControllerMock = $this->getAccessibleMock('BJD\Events\Controller\EventController', ['dummy'], [], '', false);
-        $contextFactoryMock = $this->getMock('TYPO3\TYPO3CR\Domain\Service\ContextFactory', [], [], '', false);
-        $systemLoggerMock = $this->getMock('TYPO3\Flow\Log\SystemLoggerInterface', [], [], '', false);
+        $contextFactoryMock = $this->createMock('TYPO3\TYPO3CR\Domain\Service\ContextFactory');
+        $systemLoggerMock = $this->createMock('TYPO3\Flow\Log\SystemLoggerInterface');
         $exception = new \Exception();
 
         $this->inject($eventControllerMock, 'contextFactory', $contextFactoryMock);
@@ -87,13 +87,13 @@ class EventControllerTest extends BaseTestCase
     public function ifNoPersonGivenTheCurrentPartyProfileWillBeUsedOnRemoveAttendee()
     {
         $eventControllerMock = $this->getAccessibleMock('BJD\Events\Controller\EventController', ['dummy'], [], '', false);
-        $profileServiceMock = $this->getMock('BuJitsuDo\Authentication\Service\ProfileService', [], [], '', false);
-        $contextFactoryMock = $this->getMock('TYPO3\TYPO3CR\Domain\Service\ContextFactory', [], [], '', false);
-        $responseMock = $this->getMock('TYPO3\Flow\Http\Response', [], [], '', false);
-        $contextMock = $this->getMock('TYPO3\TYPO3CR\Domain\Service\Context', [], [], '', false);
-        $profileNodeMock = $this->getMock('TYPO3\TYPO3CR\Domain\Model\NodeInterface', [], [], '', false);
-        $eventNodeMock = $this->getMock('TYPO3\TYPO3CR\Domain\Model\NodeInterface', [], [], '', false);
-        $eventServiceMock = $this->getMock('BJD\Events\Service\EventService', [], [], '', false);
+        $profileServiceMock = $this->createMock('BuJitsuDo\Authentication\Service\ProfileService');
+        $contextFactoryMock = $this->createMock('TYPO3\TYPO3CR\Domain\Service\ContextFactory');
+        $responseMock = $this->createMock('TYPO3\Flow\Http\Response');
+        $contextMock = $this->createMock('TYPO3\TYPO3CR\Domain\Service\Context');
+        $profileNodeMock = $this->createMock('TYPO3\TYPO3CR\Domain\Model\NodeInterface');
+        $eventNodeMock = $this->createMock('TYPO3\TYPO3CR\Domain\Model\NodeInterface');
+        $eventServiceMock = $this->createMock('BJD\Events\Service\EventService');
 
         $this->inject($eventControllerMock, 'profileService', $profileServiceMock);
         $this->inject($eventControllerMock, 'contextFactory', $contextFactoryMock);
@@ -115,13 +115,13 @@ class EventControllerTest extends BaseTestCase
     public function ifPersonGivenTheProfileWillBeSearchedOnIdOnRemoveAttendee()
     {
         $eventControllerMock = $this->getAccessibleMock('BJD\Events\Controller\EventController', ['dummy'], [], '', false);
-        $profileServiceMock = $this->getMock('BuJitsuDo\Authentication\Service\ProfileService', [], [], '', false);
-        $contextFactoryMock = $this->getMock('TYPO3\TYPO3CR\Domain\Service\ContextFactory', [], [], '', false);
-        $responseMock = $this->getMock('TYPO3\Flow\Http\Response', [], [], '', false);
-        $contextMock = $this->getMock('TYPO3\TYPO3CR\Domain\Service\Context', [], [], '', false);
-        $profileNodeMock = $this->getMock('TYPO3\TYPO3CR\Domain\Model\NodeInterface', [], [], '', false);
-        $eventNodeMock = $this->getMock('TYPO3\TYPO3CR\Domain\Model\NodeInterface', [], [], '', false);
-        $eventServiceMock = $this->getMock('BJD\Events\Service\EventService', [], [], '', false);
+        $profileServiceMock = $this->createMock('BuJitsuDo\Authentication\Service\ProfileService');
+        $contextFactoryMock = $this->createMock('TYPO3\TYPO3CR\Domain\Service\ContextFactory');
+        $responseMock = $this->createMock('TYPO3\Flow\Http\Response');
+        $contextMock = $this->createMock('TYPO3\TYPO3CR\Domain\Service\Context');
+        $profileNodeMock = $this->createMock('TYPO3\TYPO3CR\Domain\Model\NodeInterface');
+        $eventNodeMock = $this->createMock('TYPO3\TYPO3CR\Domain\Model\NodeInterface');
+        $eventServiceMock = $this->createMock('BJD\Events\Service\EventService');
 
         $this->inject($eventControllerMock, 'profileService', $profileServiceMock);
         $this->inject($eventControllerMock, 'contextFactory', $contextFactoryMock);
@@ -144,8 +144,8 @@ class EventControllerTest extends BaseTestCase
     public function exceptionIsLoggedWhenCaughtOnRemoveAttendee()
     {
         $eventControllerMock = $this->getAccessibleMock('BJD\Events\Controller\EventController', ['dummy'], [], '', false);
-        $contextFactoryMock = $this->getMock('TYPO3\TYPO3CR\Domain\Service\ContextFactory', [], [], '', false);
-        $systemLoggerMock = $this->getMock('TYPO3\Flow\Log\SystemLoggerInterface', [], [], '', false);
+        $contextFactoryMock = $this->createMock('TYPO3\TYPO3CR\Domain\Service\ContextFactory');
+        $systemLoggerMock = $this->createMock('TYPO3\Flow\Log\SystemLoggerInterface');
         $exception = new \Exception();
 
         $this->inject($eventControllerMock, 'contextFactory', $contextFactoryMock);
