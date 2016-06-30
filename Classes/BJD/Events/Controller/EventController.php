@@ -15,24 +15,28 @@ class EventController extends ActionController
 
     /**
      * @Flow\Inject
+     *
      * @var EventService
      */
     protected $eventService;
 
     /**
      * @Flow\Inject
+     *
      * @var ProfileService
      */
     protected $profileService;
 
     /**
      * @Flow\Inject
+     *
      * @var ContextFactory
      */
     protected $contextFactory;
 
     /**
      * @Flow\Inject
+     *
      * @var SystemLoggerInterface
      */
     protected $systemLogger;
@@ -42,6 +46,7 @@ class EventController extends ActionController
      *
      * @param string $event
      * @param string $person
+     *
      * @return string
      */
     public function addAttendeeAction($event, $person = '')
@@ -64,6 +69,7 @@ class EventController extends ActionController
     /**
      * @param string $event
      * @param string $person
+     *
      * @return string
      */
     public function removeAttendeeAction($event, $person = '')
@@ -87,7 +93,9 @@ class EventController extends ActionController
     /**
      * @param string $personIdentifier
      * @param Context $context
+     *
      * @throws \Exception
+     *
      * @return NodeInterface
      */
     protected function getPersonProfile($personIdentifier, Context $context)
