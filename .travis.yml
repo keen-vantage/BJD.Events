@@ -1,3 +1,6 @@
+notifications:
+  slack:
+    secure: bIW82RNhSK3dwToc5BrrRrc6u2208g1M3D/bwKjmLqCzfWKJkNXoQwykogQ5ae7NLu4L85waeRFmDbi4igbge45J1x6DNlalStn8hQoE/wGSfryRdNz9raX1zvKT0NXl3b1INzgkTn09t/t+YRuXREeIo6R5c/Ji3aQziGL9ZdF5OZ5JnBxGH/eY92QN6olsHSQ4DupfWrev6E8tsPSc5CxWxNMSvlRGKbc4/E7Hh7FGE9agxN75UV4IpxhDvWynRFez2uUZkyS10aIk36xCDnCl6co850eS/kdWnxRjLi0PLAXjgkYyJoq38M2Lexgcth/reY9wgFKWZ5vJatcvUneCP/CUO9sWBbUl2CDydrqvS3Oh3Z7iEKOsS2gLtqlc1q2yP1IVMw/oFCKY/8Q9skrDyKi8robkdsc3Lyp/04GxnG1AOWjLKmqeDkl81jZRRrJJwMcXESqQd+Me+slUM+SPFX295xjitnPLIbzL3jHUqmaa1HB4F7XfUcMXuAlHeES+y6BEdN5mGlb0MjZY/5Pck+BrzJFdytNMPSr6HJBxhKytl0/f1Zv1XjmkIsJCulG/txupupC3ubyiqDG6nDPcqMt1VFsSI3HsxHaJYitF5qmIOCCfSxP25Of4mE+MeZT+csyXcKk9gXAwUpIySbA22w6931nTusc40ALwiCg=
 language: php
 php:
   - 5.5
@@ -7,7 +10,7 @@ before_install:
   - cd ..
   - git clone https://github.com/neos/neos-base-distribution.git
   - cd neos-base-distribution
-  - git checkout 2.0.0
+  - git checkout 2.2.0
   - composer update --dev
   - composer require codeclimate/php-test-reporter:dev-master --dev
   - composer require nieuwenhuizen/cr:dev-master
