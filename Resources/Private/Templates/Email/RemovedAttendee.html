@@ -1,5 +1,12 @@
-{person.label} heeft zich afgemeld voor {event.label} {f:if(condition: event.properties.type, then: '- {event.properties.type}')}<br />
-<br />
-Met vriendelijke groet,<br />
-<br />
-BU JITSU DO
+<f:layout name="Base"/>
+
+<f:section name="content">
+    <p>
+        {person.label} heeft zich afgemeld voor {event.label} {f:if(condition: event.properties.type, then: '-
+        {event.properties.type}')}<br/>
+        <br/>
+        Met vriendelijke groet,<br/>
+        <br/>
+        BU JITSU DO
+    </p>
+</f:section>
