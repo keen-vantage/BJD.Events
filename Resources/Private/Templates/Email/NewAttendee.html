@@ -4,7 +4,12 @@
 	<p>
 		{person.label} heeft zich aangemeld voor {event.label}<br />
 		<f:if condition="{event.properties.type}">
-			Doet examen voor {event.properties.type} voor niveau: {person.nextDegree}<br />
+			<f:if condition="{event.properties.type} == 'Bu Jitsu Do'">
+				Doet examen voor {event.properties.type} voor niveau: {person.nextDegree}<br />
+			</f:if>
+			<f:if condition="{event.properties.type} == 'Jiu Jitsu'">
+				Doet examen voor {event.properties.type} voor niveau: {person.nextJiuJitsuDegree}<br />
+			</f:if>
 		</f:if>
 		<br />
 		Met vriendelijke groet,<br />
