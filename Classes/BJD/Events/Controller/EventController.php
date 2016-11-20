@@ -47,7 +47,7 @@ class EventController extends ActionController
      * @param string $event
      * @param string $person
      *
-     * @return string
+     * @return void
      */
     public function addAttendeeAction($event, $person = '')
     {
@@ -56,21 +56,19 @@ class EventController extends ActionController
             $person = $this->getPersonProfile($person, $context);
             $event = $context->getNodeByIdentifier($event);
             $this->eventService->addAttendeeToEvent($event, $person);
-            $this->response->setHeader('Notification', 'Top, that\'s the spirit! ;)');
-            $this->response->setHeader('NotificationType', 'success');
-            $this->response->setHeader('NotificationIcon', 'fa-check');
         } catch (\Exception $exception) {
             $this->systemLogger->log($exception->getMessage(), LOG_ALERT);
         }
 
-        return '';
+        $this->addFlashMessage('Je bent aangemeld!');
+        $this->redirectToUri('/agenda');
     }
 
     /**
      * @param string $event
      * @param string $person
      *
-     * @return string
+     * @return void
      */
     public function removeAttendeeAction($event, $person = '')
     {
@@ -79,15 +77,12 @@ class EventController extends ActionController
             $person = $this->getPersonProfile($person, $context);
             $event = $context->getNodeByIdentifier($event);
             $this->eventService->removeAttendeeFromEvent($event, $person);
-            $this->response->setHeader('Notification',
-                'Jammer, maar je kunt je altijd weer aanmelden wanneer je je bedenkt!');
-            $this->response->setHeader('NotificationType', 'success');
-            $this->response->setHeader('NotificationIcon', 'fa-check');
         } catch (\Exception $exception) {
             $this->systemLogger->log($exception->getMessage(), LOG_ALERT);
         }
 
-        return '';
+        $this->addFlashMessage('Je bent afgemeld');
+        $this->redirectToUri('/agenda');
     }
 
     /**

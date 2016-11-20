@@ -18,30 +18,14 @@
 					<f:then>
 						<events:conditional.isRegisteredForEvent event="{event}">
 							<f:then>
-								<f:link.action additionalAttributes="{data-action: 'remove-from-event'}" action="removeAttendee" controller="Event" package="BJD.Events" arguments="{event: event.identifier}">
-									<button class="small">
-										<i class="fa fa-min"></i> Meld je af
-									</button>
-								</f:link.action>
-
-								<f:link.action class="hide" additionalAttributes="{data-action: 'add-to-event'}" action="addAttendee" controller="Event" package="BJD.Events" arguments="{event: event.identifier}">
-									<button class="small">
-										<i class="fa fa-plus"></i> Ik kom ook!
-									</button>
-								</f:link.action>
+								<f:form method="post" action="removeAttendee" controller="Event" package="BJD.Events" arguments="{event: event.identifier}">
+									<f:form.button class="small">Meld je af</f:form.button>
+								</f:form>
 							</f:then>
 							<f:else>
-								<f:link.action additionalAttributes="{data-action: 'add-to-event'}" action="addAttendee" controller="Event" package="BJD.Events" arguments="{event: event.identifier}">
-									<button class="small">
-										<i class="fa fa-plus"></i> Ik kom ook!
-									</button>
-								</f:link.action>
-
-								<f:link.action class="hide" additionalAttributes="{data-action: 'remove-from-event'}" action="removeAttendee" controller="Event" package="BJD.Events" arguments="{event: event.identifier}">
-									<button class="small">
-										<i class="fa fa-min"></i> Meld je af
-									</button>
-								</f:link.action>
+								<f:form method="post" action="addAttendee" controller="Event" package="BJD.Events" arguments="{event: event.identifier}">
+									<f:form.button class="small">ik kom ook...</f:form.button>
+								</f:form>
 							</f:else>
 						</events:conditional.isRegisteredForEvent>
 					</f:then>

@@ -1,4 +1,11 @@
 {namespace neos=TYPO3\Neos\ViewHelpers}
+<f:flashMessages as="flashMessages">
+	<f:for each="{flashMessages}" as="flashMessage">
+		<div data-alert class="alert-box success">
+			{flashMessage.message}
+		</div>
+	</f:for>
+</f:flashMessages>
 <div data-content="event-list" xmlns:f="http://www.w3.org/1999/XSL/Transform">
 	<f:if condition="{exams -> f:count()} > 0">
 		<div class="row small-collapse medium-uncollapse">
