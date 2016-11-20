@@ -8,7 +8,7 @@
     '@format': 'html'
     'person': ''
   httpMethods:
-    - 'PUT'
+    - 'POST'
 
 -
   name: 'Add attendee to event'
@@ -20,4 +20,4 @@
     '@format': 'html'
     'person': ''
   httpMethods:
-    - 'PUT'
+    - 'POST'
