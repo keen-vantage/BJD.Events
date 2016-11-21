@@ -100,6 +100,9 @@ class EventService
      */
     public function sendNewAttendeeEmail(NodeInterface $event, NodeInterface $person)
     {
+        $personName = $person->getLabel();
+        $eventName = $event->getLabel();
+        $plainTextMessage = $personName . ' heeft zicht aangemeld voor ' . $eventName . '. Met vriendelijke groet Bu jitsu do';
         $this->mailerService->sendEmail(
             $this->eventMailSettings,
             'Nieuwe aanmelding voor ' . $event->getLabel(),
@@ -107,7 +110,8 @@ class EventService
             [
                 'person' => $person,
                 'event'  => $event,
-            ]
+            ],
+            $plainTextMessage
         );
     }
 
@@ -119,6 +123,9 @@ class EventService
      */
     public function sendAttendeeRemovedEmail(NodeInterface $event, NodeInterface $person)
     {
+        $personName = $person->getLabel();
+        $eventName = $event->getLabel();
+        $plainTextMessage = $personName . ' heeft zicht afgemeld voor ' . $eventName . '. Met vriendelijke groet Bu jitsu do';
         $this->mailerService->sendEmail(
             $this->eventMailSettings,
             'Afmelding voor ' . $event->getLabel(),
@@ -126,7 +133,8 @@ class EventService
             [
                 'person' => $person,
                 'event'  => $event,
-            ]
+            ],
+            $plainTextMessage
         );
     }
 
