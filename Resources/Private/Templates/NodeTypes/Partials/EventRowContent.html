@@ -24,7 +24,16 @@
 							</f:then>
 							<f:else>
 								<f:form method="post" action="addAttendee" controller="Event" package="BJD.Events" arguments="{event: event.identifier}">
-									<f:form.button class="small">ik kom ook...</f:form.button>
+									<f:form.button class="small">
+										<f:if condition="{event.nodeType.name} == 'BJD.Events:Exam'">
+											<f:then>
+												Ik doe ook examen
+											</f:then>
+											<f:else>
+												Ik doe mee
+											</f:else>
+										</f:if>
+									</f:form.button>
 								</f:form>
 							</f:else>
 						</events:conditional.isRegisteredForEvent>
