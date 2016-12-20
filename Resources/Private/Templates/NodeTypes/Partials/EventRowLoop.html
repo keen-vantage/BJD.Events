@@ -1,33 +1,35 @@
 {namespace neos=TYPO3\Neos\ViewHelpers}
 <dl class="accordion columns small-12" data-accordion>
 	<f:for each="{events}" as="event" iteration="iterator">
-		<dd class="accordion-navigation">
-			<a href="#{f:if(condition: event.properties.type, then: 'exam-')}panel{iterator.index}" data-id="{f:if(condition: event.properties.type, then: 'exam-')}panel{iterator.index}" class="accordion-focus {classes}">
-				<div class="row">
-					<div class="columns small-2 medium-1">
-						<span class="day">{event.properties.start -> f:format.date(format: 'd')}</span>
-						<span class="month">{event.properties.start -> f:format.date(format: 'M')}</span>
+		<f:if condition="{f:format.date(date: 'now' format: 'Y-m-d')} < {f:format.date(date: event.properties.start, format: 'Y-m-d')}">
+			<dd class="accordion-navigation">
+				<a href="#{f:if(condition: event.properties.type, then: 'exam-')}panel{iterator.index}" data-id="{f:if(condition: event.properties.type, then: 'exam-')}panel{iterator.index}" class="accordion-focus {classes}">
+					<div class="row">
+						<div class="columns small-2 medium-1">
+							<span class="day">{event.properties.start -> f:format.date(format: 'd')}</span>
+							<span class="month">{event.properties.start -> f:format.date(format: 'M')}</span>
+						</div>
+						<div class="columns small-10 medium-6">
+							<h3>
+								{event.properties.title} {f:if(condition: event.properties.type, then: '| {event.properties.type}')}<br />
+								<sub>
+									<i class="fa fa-clock-o"></i>
+									<time>
+										{event.properties.start -> f:format.date(format: 'H:i')} -
+										{event.properties.end -> f:format.date(format: 'H:i')}
+									</time>
+								</sub>
+							</h3>
+						</div>
+						<div class="columns medium-5 show-for-medium-up text-right">
+							<h3>{event.properties.address}, {event.properties.city}</h3>
+						</div>
 					</div>
-					<div class="columns small-10 medium-6">
-						<h3>
-							{event.properties.title} {f:if(condition: event.properties.type, then: '| {event.properties.type}')}<br />
-							<sub>
-								<i class="fa fa-clock-o"></i>
-								<time>
-									{event.properties.start -> f:format.date(format: 'H:i')} -
-									{event.properties.end -> f:format.date(format: 'H:i')}
-								</time>
-							</sub>
-						</h3>
-					</div>
-					<div class="columns medium-5 show-for-medium-up text-right">
-						<h3>{event.properties.address}, {event.properties.city}</h3>
-					</div>
+				</a>
+				<div id="{f:if(condition: event.properties.type, then: 'exam-')}panel{iterator.index}" class="content">
+					<f:render partial="EventRowContent" arguments="{_all}" />
 				</div>
-			</a>
-			<div id="{f:if(condition: event.properties.type, then: 'exam-')}panel{iterator.index}" class="content">
-				<f:render partial="EventRowContent" arguments="{_all}" />
-			</div>
-		</dd>
+			</dd>
+		</f:if>
 	</f:for>
 </dl>

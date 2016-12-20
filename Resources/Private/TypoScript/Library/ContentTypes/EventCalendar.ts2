@@ -9,8 +9,8 @@ prototype(BJD.Events:EventCalendar) < prototype(TYPO3.Neos:Content) {
 	selectedDateString = ${request.arguments.month + '-' + request.arguments.year}
 	selectedDate = ${Date.parse(this.selectedDateString, 'm-Y')}
 
-	exams = ${Event.hidePastEvents(BudoDate.sortNodesByDate(q(site).find('[instanceof BJD.Events:Exam]').get(), 'start', false))}
-	events = ${Event.hidePastEvents(BudoDate.sortNodesByDate(q(site).find('[instanceof BJD.Events:Event][!instanceof BJD.Events:Exam]').get(), 'start', false))}
+	exams = ${q(documentNode).find('[instanceof BJD.Events:Exam]').sort('start', 'ASC').get()}
+	events = ${q(documentNode).find('[instanceof BJD.Events:Event][!instanceof BJD.Events:Exam]').sort('start', 'ASC').get()}
 
 	@cache {
 		mode = 'uncached'
